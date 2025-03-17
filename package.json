@@ -2,16 +2,21 @@
   "name": "solana-playground",
   "module": "index.ts",
   "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "start": "bun ./src/index.ts"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.13",
+    "@solana/web3.js": "^1.98.0",
+    "bip39": "^3.1.0",
+    "gill": "^0.8.0"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "dotenv": "^16.4.7"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
-  "dependencies": {
-    "@solana/spl-token": "^0.4.13",
-    "@solana/web3.js": "^1.98.0"
-  }
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
