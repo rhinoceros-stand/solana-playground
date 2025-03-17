@@ -6,13 +6,13 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun ./src/index.ts"
+    "start": "bun ./src/createToken.ts"
   },
   "dependencies": {
     "@solana/spl-token": "^0.4.13",
     "@solana/web3.js": "^1.98.0",
     "bip39": "^3.1.0",
-    "gill": "^0.8.0"
+    "bs58": "^6.0.0"
   },
   "devDependencies": {
     "@types/bun": "latest",

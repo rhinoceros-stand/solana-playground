@@ -1,9 +1,7 @@
 import * as dotenv from 'dotenv'
-import { generateExtractableKeyPairSigner } from 'gill'
-import {
-  saveKeypairSignerToEnvFile,
-  loadKeypairFromEnvironment
-} from 'gill/node'
+import * as bip39 from 'bip39'
+import bs58 from 'bs58'
+import { Keypair } from '@solana/web3.js'
 
 const KEY_PAIR_VARIABLE = 'KEY_PAIR'
 
@@ -11,23 +9,18 @@ dotenv.config({
   path: ['.env.local', 'env']
 })
 
-let wallet
+let wallet: Keypair
+let mnemonic
 
 if (process.env[KEY_PAIR_VARIABLE]) {
-  const signer = await loadKeypairFromEnvironment(KEY_PAIR_VARIABLE)
-  wallet = signer.privateKey
+  mnemonic = process.env[KEY_PAIR_VARIABLE]
 } else {
-  try {
-    // extractable and less secure keypair
-    const extractableSigner = await generateExtractableKeyPairSigner()
-    await saveKeypairSignerToEnvFile(extractableSigner, KEY_PAIR_VARIABLE, '.env.local')
-    const signer = extractableSigner.keyPair
-    wallet = signer.privateKey
-  } catch (e) {
-    console.error('Generate Extract KeyPair error', e)
-  }
+  mnemonic = bip39.generateMnemonic()
 }
 
-export default {
+const seed = bip39.mnemonicToSeedSync(mnemonic)
+wallet = Keypair.fromSeed(seed.slice(0, 32))
+
+export {
   wallet
 }
